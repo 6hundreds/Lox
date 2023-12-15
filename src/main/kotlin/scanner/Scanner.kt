@@ -60,9 +60,6 @@ class Scanner(private val source: String) {
         }
     }
 
-    private fun isAlpha(c: Char): Boolean = c.isLetter() || c == '_'
-
-    private fun isAlphaNumeric(c: Char): Boolean = isAlpha(c) || isDigit(c)
     private fun identifier() {
         while (isAlphaNumeric(peek())) advance()
 
@@ -117,11 +114,16 @@ class Scanner(private val source: String) {
         }
     }
 
+    private fun isAlpha(c: Char): Boolean = c.isLetter() || c == '_'
+
+    private fun isAlphaNumeric(c: Char): Boolean = isAlpha(c) || isDigit(c)
+
+    private fun advance(): Char = source[current++]
+
+    private fun isAtEnd(): Boolean = current >= source.length
+
     private fun addToken(type: Token.Type, literal: Any? = null) {
         val lexeme = source.substring(start, current)
         tokens.add(Token(type, lexeme, literal, line))
     }
-
-    private fun advance(): Char = source[current++]
-    private fun isAtEnd(): Boolean = current >= source.length
 }

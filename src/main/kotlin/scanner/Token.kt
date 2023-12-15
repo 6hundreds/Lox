@@ -1,10 +1,10 @@
 package scanner
 
 data class Token(
-    private val type: Type,
-    private val lexeme: String,
-    private val literal: Any?,
-    private val line: Int
+    val type: Type,
+    val lexeme: String,
+    val literal: Any?,
+    val line: Int
 ) {
     enum class Type {
         // Single-character tokens.
